@@ -8,7 +8,7 @@ language process techniques such as CNN and Transformer models.
 
 **Folders**
 
-- [executable_papers](./notebooks): Notebooks with image captioning examples
+- [executable_papers](./executable_papers): Notebooks with image captioning examples
 - [src](./src): Python code with scripts for image captioning
 
 **Files**

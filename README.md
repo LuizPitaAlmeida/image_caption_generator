@@ -16,7 +16,7 @@ language process techniques such as CNN and Transformer models.
 - [dockerfile](./dockerfile): Dockerfile to build computational environment
 - [good_practices](./good_practices.md): Some good practices in reproducible research
 - [license](./LICENSE): Apache 2.0 License
-- [README.md](,/README.md): Main information and instruction to install and use the scripts
+- [README.md](,/README.md): Main information and instruction to install and use scripts
 
 ## Setup Environment
 
@@ -45,6 +45,21 @@ For more details refer to
 
 ## Build Environment
 
+From the root directory of repository, run:
+
 ```bash
 $ sudo docker build --tag img_caption --file Dockerfile --pull .
 ```
+
+## Run Executable Papers
+
+From the root directory of repository, run:
+
+```bash
+$ sudo docker run -it --rm -p 8888:8888 \
+    --volume "$PWD"/executable_papers:/executable_papers \
+    img_caption
+```
+
+After Control+Click in the prompt link, the notebook directory
+will open in your browser. Chose one of the options and run all cells.

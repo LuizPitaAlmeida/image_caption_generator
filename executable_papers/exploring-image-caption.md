@@ -123,10 +123,26 @@ resnet101 = models.resnet101(pretrained=True)
 print(resnet101)
 ```
 
-BERT
+### BERT - Bidirectional Encoder Representations from Transformers
+
+BERT is recent paper published by Google AI team that, in the last year, got state-of-art results in a wide range of NLP tasks. It is designed using only attention mechanism, Transformer module \[attention is all you need\] and considering a bidirectional context.
+
+Bert was trained to be a language model that understand better the language context and flow. Researches notice that BERT could be distribute as a pre-trained model such as pre-trained CNNs,  so common in Computer Vision area.
+
+```bash id=b531084f-b926-4cba-b7a4-3f5e92438b29
+pip install transformers
+```
 
 ```python id=78d7615a-47aa-4287-a958-e662e7f681fe
+from transformers import BertTokenizer, BertModel
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+bert = BertModel.from_pretrained('bert-base-uncased')
+print(bert)
 ```
+
+### Our encode-decoder model
+
+In this section we present our encoder-decoder model. The encoder will be formed by the feature extraction of ResNet-101, while in the decoder will use the BERT to generate contextualized word vectors that are after detokenized and the predicted captions are formed using BERT embedding and images features together in a attention mechanism module. This module is based in <<https://github.com/ajamjoom/Image-Captions>> implementation.
 
 WITHOUT TRAINING vs SUPERVISED
 
@@ -185,7 +201,7 @@ From experiments we expect to compare our results with related work results.
 <https://nextjournal.com/data/QmZsqhSmCKSPtnVkgTDTz7TxhwkMLwQN4miZwz2BsAku5j?content-type=image/svg%2Bxml>
 
 <details id="com.nextjournal.article">
-<summary>This notebook was exported from <a href="https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChxYRpyv6kVw1ZGSrRtMNz">https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChxYRpyv6kVw1ZGSrRtMNz</a></summary>
+<summary>This notebook was exported from <a href="https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChyPwx6EF8Uz9YLSsTTKsa">https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChyPwx6EF8Uz9YLSsTTKsa</a></summary>
 
 ```edn nextjournal-metadata
 {:article
@@ -235,8 +251,11 @@ From experiments we expect to compare our results with related work results.
    "71ddd10c-207a-4473-a709-8e43c3eb46d2"
    {:id "71ddd10c-207a-4473-a709-8e43c3eb46d2", :kind "file"},
    "78d7615a-47aa-4287-a958-e662e7f681fe"
-   {:id "78d7615a-47aa-4287-a958-e662e7f681fe",
+   {:compute-ref #uuid "e2db7c53-9940-4d9d-986c-779af6f1d8e1",
+    :exec-duration 16549,
+    :id "78d7615a-47aa-4287-a958-e662e7f681fe",
     :kind "code",
+    :output-log-lines {:stdout 296},
     :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
    "8697ac42-8bc8-4586-afaf-a41829beb77c"
    {:compute-ref #uuid "da6e20fa-e546-4c8b-a218-414ed7e4cc17",
@@ -289,6 +308,13 @@ From experiments we expect to compare our results with related work results.
     [:output
      "150585be-fcca-4821-a1da-b91a650f258a"
      "annotations_trainval2014.zip"]},
+   "b531084f-b926-4cba-b7a4-3f5e92438b29"
+   {:compute-ref #uuid "767af395-f880-4e1f-a774-277744eda155",
+    :exec-duration 8113,
+    :id "b531084f-b926-4cba-b7a4-3f5e92438b29",
+    :kind "code",
+    :output-log-lines {:stdout 32},
+    :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
    "c52b7b53-f891-40b3-b443-eba915e57b98"
    {:id "c52b7b53-f891-40b3-b443-eba915e57b98",
     :kind "reference",
@@ -311,7 +337,7 @@ From experiments we expect to compare our results with related work results.
     :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]}},
   :nextjournal/id #uuid "02df7717-0b3f-47d8-9a00-c0b5e372c244",
   :article/change
-  {:nextjournal/id #uuid "5ecc8144-58e8-43cc-b419-48392e8940a3"}}}
+  {:nextjournal/id #uuid "5ecd07f6-e3b4-4e4b-91a6-ff914b7dcbad"}}}
 
 ```
 </details>

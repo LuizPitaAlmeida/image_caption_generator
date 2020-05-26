@@ -28,6 +28,8 @@ BERT (2019)
 
 ## Materials and Methods
 
+In this section we describe the materials such as data and programming language used, and adopted methodology.
+
 ### Programing Language
 
 For this project we are using the Python 3 language with the Pytorch 1.3 library. Pytorch is an open source machine learning framework designed to accelerate research prototyping. In the last years together with TensorFlow is the most used framework for deep learning.
@@ -108,15 +110,33 @@ plt.gcf()
 
 ![result][nextjournal#output#a2a64983-107b-43ec-9a66-79e88e1b533b#result]
 
-RESNET50
+### Convolutional Neural Networks
+
+We decided to use a common used CNN for image feature extraction, in this case, we chosen the ResNet-101.
+
+```python id=8697ac42-8bc8-4586-afaf-a41829beb77c
+import torchvision.models as models
+resnet101 = models.resnet101(pretrained=True)
+```
+
+```python id=f14263af-258c-4c75-bfa9-d8334becc3a0
+print(resnet101)
+```
 
 BERT
+
+```python id=78d7615a-47aa-4287-a958-e662e7f681fe
+```
 
 WITHOUT TRAINING vs SUPERVISED
 
 CPU/GPU
 
+METRICS
+
 ## Experiments and results
+
+From experiments we expect to compare our results with related work results.
 
 ## Discussion and Conclusions
 
@@ -162,10 +182,10 @@ CPU/GPU
 <#nextjournal#reference#d3508725-8cdf-416b-9ca3-8f97cca1a142>
 
 [nextjournal#output#a2a64983-107b-43ec-9a66-79e88e1b533b#result]:
-<https://nextjournal.com/data/QmePaRyAmFde5cHz9AxJ97jfE27Z3Zkgft9krmucTEXwQo?content-type=image/svg%2Bxml>
+<https://nextjournal.com/data/QmZsqhSmCKSPtnVkgTDTz7TxhwkMLwQN4miZwz2BsAku5j?content-type=image/svg%2Bxml>
 
 <details id="com.nextjournal.article">
-<summary>This notebook was exported from <a href="https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChxUGZYzS7KbXEGdJaN8To">https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChxUGZYzS7KbXEGdJaN8To</a></summary>
+<summary>This notebook was exported from <a href="https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChxYRpyv6kVw1ZGSrRtMNz">https://nextjournal.com/a/MaQo4ptSYDSC7jGKsoSR1?change-id=ChxYRpyv6kVw1ZGSrRtMNz</a></summary>
 
 ```edn nextjournal-metadata
 {:article
@@ -181,8 +201,8 @@ CPU/GPU
     :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"],
     :stdout-collapsed? false},
    "2cc038ea-4dad-4cd3-b255-e4fe2c4cc404"
-   {:compute-ref #uuid "c21f5fd0-1862-42da-b3d3-55a43934c840",
-    :exec-duration 440,
+   {:compute-ref #uuid "be0da0bd-0661-4e5f-8f97-b2d2285a5b7e",
+    :exec-duration 925,
     :id "2cc038ea-4dad-4cd3-b255-e4fe2c4cc404",
     :kind "code",
     :output-log-lines {:stdout 3},
@@ -196,6 +216,7 @@ CPU/GPU
       :change/nextjournal.id
       #uuid "5df706bf-9a09-43e3-8de2-ff9647fb5215",
       :node/id "24f5f730-f1c8-497a-a1e7-b5b623450b49"}],
+    :environment? true,
     :id "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325",
     :kind "runtime",
     :language "python",
@@ -213,20 +234,31 @@ CPU/GPU
      "image_info_test2014.zip"]},
    "71ddd10c-207a-4473-a709-8e43c3eb46d2"
    {:id "71ddd10c-207a-4473-a709-8e43c3eb46d2", :kind "file"},
+   "78d7615a-47aa-4287-a958-e662e7f681fe"
+   {:id "78d7615a-47aa-4287-a958-e662e7f681fe",
+    :kind "code",
+    :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
+   "8697ac42-8bc8-4586-afaf-a41829beb77c"
+   {:compute-ref #uuid "da6e20fa-e546-4c8b-a218-414ed7e4cc17",
+    :exec-duration 9158,
+    :id "8697ac42-8bc8-4586-afaf-a41829beb77c",
+    :kind "code",
+    :output-log-lines {:stdout 3},
+    :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
    "8c1ea37e-ca3e-4f9e-b718-cb31d20e8d55"
-   {:compute-ref #uuid "7fff6fc5-4e23-4c55-8790-cd1280e741c2",
-    :exec-duration 61143,
+   {:compute-ref #uuid "48fc9194-1c55-43a2-a85c-513319d2e73b",
+    :exec-duration 50258,
     :id "8c1ea37e-ca3e-4f9e-b718-cb31d20e8d55",
     :kind "code",
-    :locked? true,
+    :locked? false,
     :output-log-lines {:stdout 66},
     :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
    "933c43f5-42db-4187-81de-b96ec6ce3a86"
-   {:compute-ref #uuid "e2e3f5c9-425a-4d5f-a394-62ca1c893c66",
-    :exec-duration 176214,
+   {:compute-ref #uuid "05406a08-27b8-4c33-b62e-ba9b94ac6b3d",
+    :exec-duration 170863,
     :id "933c43f5-42db-4187-81de-b96ec6ce3a86",
     :kind "code",
-    :locked? true,
+    :locked? false,
     :output-log-lines {:stdout 40514},
     :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
    "99d957af-fae0-41ea-afab-949696fd3c60"
@@ -237,15 +269,15 @@ CPU/GPU
     :link
     [:output "150585be-fcca-4821-a1da-b91a650f258a" "val2014.zip"]},
    "a2a64983-107b-43ec-9a66-79e88e1b533b"
-   {:compute-ref #uuid "bd7de890-1dfe-4140-a82b-1b3d0149c434",
-    :exec-duration 1030,
+   {:compute-ref #uuid "dfff63a8-6ac7-4f6d-88f0-2932e6ea7c8b",
+    :exec-duration 1833,
     :id "a2a64983-107b-43ec-9a66-79e88e1b533b",
     :kind "code",
     :output-log-lines {:stdout 8},
     :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]},
    "aaaed38c-05c0-4ad8-9d5a-f1e42eb52dd8"
-   {:compute-ref #uuid "13f6b60c-c7df-455b-8c0f-b50338d93b69",
-    :exec-duration 1149,
+   {:compute-ref #uuid "11f7d8b2-b4dd-4ae8-b9af-59bcfbd82105",
+    :exec-duration 1112,
     :id "aaaed38c-05c0-4ad8-9d5a-f1e42eb52dd8",
     :kind "code",
     :output-log-lines {:stdout 6},
@@ -269,10 +301,17 @@ CPU/GPU
    "d9732e58-bbf7-40c8-81e0-60e79db38101"
    {:id "d9732e58-bbf7-40c8-81e0-60e79db38101",
     :kind "github-repository",
-    :ref "master"}},
+    :ref "master"},
+   "f14263af-258c-4c75-bfa9-d8334becc3a0"
+   {:compute-ref #uuid "2fa5b049-72d3-476f-ab0c-cc06f3ab3a36",
+    :exec-duration 455,
+    :id "f14263af-258c-4c75-bfa9-d8334becc3a0",
+    :kind "code",
+    :output-log-lines {:stdout 330},
+    :runtime [:runtime "3fa4d222-d6e3-4a8f-9cd1-ac490a7b3325"]}},
   :nextjournal/id #uuid "02df7717-0b3f-47d8-9a00-c0b5e372c244",
   :article/change
-  {:nextjournal/id #uuid "5ecc75f3-b88c-4cf8-b297-f0a0d946f586"}}}
+  {:nextjournal/id #uuid "5ecc8144-58e8-43cc-b419-48392e8940a3"}}}
 
 ```
 </details>

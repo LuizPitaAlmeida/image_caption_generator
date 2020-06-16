@@ -57,7 +57,8 @@ class Bert(torch.nn.Module):
         for param in self.bert.parameters():
             param.requires_grad = False
 
-    def forward(self, captions_ids, decode_lengths, vocab, pad_id=0):
+    def forward(self, captions_ids, decode_lengths, vocab, pad_id=0,
+                device=torch.device("cuda:0")):
         """ Predict a BERT embedding for each caption in captions_ids.
 
         Input
@@ -90,7 +91,7 @@ class Bert(torch.nn.Module):
                 self._redo_tokenization(caption_ids, vocab)
 
             # Predict embeddings
-            bert_predictions = self._predict(indexed_tokens)
+            bert_predictions = self._predict(indexed_tokens, device=device)
 
             # Associate the portions of BERT embeddings to caption
             # and its tokens
@@ -109,8 +110,8 @@ class Bert(torch.nn.Module):
         indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_cap)
         return caption, tokenized_cap, indexed_tokens
 
-    def _predict(self, tokens_id):
-        bert_embedding, _ = self.bert(torch.tensor([tokens_id]))
+    def _predict(self, tokens_id, device=torch.device("cuda:0")):
+        bert_embedding, _ = self.bert(torch.tensor([tokens_id]).to(device))
         return bert_embedding.squeeze(0)
 
     def _pred2tokens_embeddings(self, caption, tokenized, predicted):

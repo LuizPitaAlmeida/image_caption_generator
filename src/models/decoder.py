@@ -72,7 +72,8 @@ class Decoder(torch.nn.Module):
         self.fc.bias.data.fill_(0)
         self.fc.weight.data.uniform_(-0.1, 0.1)
 
-    def forward(self, encoder_out, captions_ids, caption_lengths):
+    def forward(self, encoder_out, captions_ids, caption_lengths,
+                device=torch.device("cuda:0")):
         # Get info from encoder output and flatten it
         encoder_out, batch_size, encoder_dim, num_pixels = \
             self._encoder_info(encoder_out)
@@ -87,7 +88,8 @@ class Decoder(torch.nn.Module):
             encoder_out, batch_size, num_pixels, decode_lengths
         )
 
-        bert_emb = self.bert(captions_ids, decode_lengths, self.vocab)
+        bert_emb = self.bert(captions_ids, decode_lengths, self.vocab,
+                             device=device)
 
         predictions, alphas = self._loop_for_attention_word_generation(
             encoder_out, bert_emb, decode_lengths, hidden, cell,

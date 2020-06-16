@@ -33,7 +33,6 @@ from transformers import BertTokenizer, BertModel
 
 # DEFINES
 CLS_TOKEN = u'[CLS] '
-DEFAULT_DEVICE = torch.device("cuda:0")
 
 
 class Bert(torch.nn.Module):
@@ -47,7 +46,7 @@ class Bert(torch.nn.Module):
     Notice that BERT is also an attention model, meaning that both images
     and captions embeddings are formed by attention mechanisms.
     """
-    def __init__(self, dev_id=DEFAULT_DEVICE):
+    def __init__(self):
         """The constructor initializes the Bert layer, its tokenizer and
         freeze its parameters to avoid train it.
         """
@@ -58,6 +57,8 @@ class Bert(torch.nn.Module):
         self.bert = BertModel.from_pretrained('bert-base-uncased')
         for param in self.bert.parameters():
             param.requires_grad = False
+
+        self.bert_tokens_id = torch.Tensor()
 
     def forward(self, captions_ids, decode_lengths, vocab, pad_id=0):
         """ Predict a BERT embedding for each caption in captions_ids.
@@ -112,8 +113,8 @@ class Bert(torch.nn.Module):
         return caption, tokenized_cap, indexed_tokens
 
     def _predict(self, tokens_id):
-        bert_embedding, _ = \
-            self.bert(torch.tensor([tokens_id]).to(self.dev_id))
+        self.bert_tokens_id = torch.tensor([tokens_id])
+        bert_embedding, _ = self.bert(self.bert_tokens_id)
         return bert_embedding.squeeze(0)
 
     def _pred2tokens_embeddings(self, caption, tokenized, predicted):

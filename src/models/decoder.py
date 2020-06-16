@@ -33,7 +33,9 @@ BERT_EMBEDDING_DIM = 768
 ATTENTION_EMBEDDING_DIM = 512
 DECODER_EMBEDDING_DIM = 512
 DROPOUT_VALUE = 0.5
-DEFAULT_GPU_DEVICE = 0
+DEFAULT_GPU_ID = "cuda:0"
+DEFAULT_DEVICE = torch.device(DEFAULT_GPU_ID if torch.cuda.is_available()
+                              else "cpu")
 
 
 class Decoder(torch.nn.Module):
@@ -44,17 +46,15 @@ class Decoder(torch.nn.Module):
                  bert_emb_dim=BERT_EMBEDDING_DIM,
                  attention_dim=ATTENTION_EMBEDDING_DIM,
                  decoder_dim=DECODER_EMBEDDING_DIM, dropout=DROPOUT_VALUE,
-                 cuda_dev=DEFAULT_GPU_DEVICE):
+                 device=DEFAULT_DEVICE):
         super(Decoder, self).__init__()
         self.vocab = vocab
         self.vocab_size = len(vocab)
         self.dropout = dropout
-        self.device = torch.device(
-            "cuda:"+str(cuda_dev) if torch.cuda.is_available() else "cpu")
-        print(self.device)
+        print(device)
 
         # BERT INIT
-        self.bert = Bert().to(self.device)
+        self.bert = Bert(device)
 
         # ATTENTION INIT
         self.attention = SoftAttention(encoder_dim, decoder_dim, attention_dim)

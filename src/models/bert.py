@@ -57,9 +57,6 @@ class Bert(torch.nn.Module):
         for param in self.bert.parameters():
             param.requires_grad = False
 
-        self.device = bert.weight.device
-        print('device=', self.device,'!')
-
     def forward(self, captions_ids, decode_lengths, vocab, pad_id=0):
         """ Predict a BERT embedding for each caption in captions_ids.
 
@@ -78,7 +75,6 @@ class Bert(torch.nn.Module):
         Default values (BERT parameters)
         - bert_emb_dim = 768
         """
-        return None
         embeddings = []
         max_dec_len = max(decode_lengths)
 
@@ -111,7 +107,7 @@ class Bert(torch.nn.Module):
         caption = CLS_TOKEN + caption
         tokenized_cap = self.tokenizer.tokenize(caption)
         indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_cap)
-        return caption, tokenized_cap.to(self.device), indexed_tokens.to(self.device)
+        return caption, tokenized_cap, indexed_tokens
 
     def _predict(self, tokens_id):
         bert_embedding, _ = self.bert(torch.tensor([tokens_id]))

@@ -24,7 +24,7 @@ Thanks Abdulrahman Jamjoom, Yunjey Choi, and Sagar Vinodababu
 """
 
 import torch
-from torchvision
+import torchvision
 
 # DEFAULT VALUES
 EMB_IMG_SIZE = 14

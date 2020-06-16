@@ -33,6 +33,7 @@ BERT_EMBEDDING_DIM = 768
 ATTENTION_EMBEDDING_DIM = 512
 DECODER_EMBEDDING_DIM = 512
 DROPOUT_VALUE = 0.5
+DEFAULT_DEVICE = "cuda:0"
 
 
 class Decoder(torch.nn.Module):
@@ -42,14 +43,15 @@ class Decoder(torch.nn.Module):
     def __init__(self, vocab, encoder_dim=ENCODER_EMBEDDING_DIM,
                  bert_emb_dim=BERT_EMBEDDING_DIM,
                  attention_dim=ATTENTION_EMBEDDING_DIM,
-                 decoder_dim=DECODER_EMBEDDING_DIM, dropout=DROPOUT_VALUE):
+                 decoder_dim=DECODER_EMBEDDING_DIM, dropout=DROPOUT_VALUE,
+                 device=torch.device(DEFAULT_DEVICE)):
         super(Decoder, self).__init__()
         self.vocab = vocab
         self.vocab_size = len(vocab)
         self.dropout = dropout
 
         # BERT INIT
-        self.bert = Bert()
+        self.bert = Bert(device=device)
 
         # ATTENTION INIT
         self.attention = SoftAttention(encoder_dim, decoder_dim, attention_dim)
@@ -72,8 +74,7 @@ class Decoder(torch.nn.Module):
         self.fc.bias.data.fill_(0)
         self.fc.weight.data.uniform_(-0.1, 0.1)
 
-    def forward(self, encoder_out, captions_ids, caption_lengths,
-                device=torch.device("cuda:0")):
+    def forward(self, encoder_out, captions_ids, caption_lengths):
         # Get info from encoder output and flatten it
         encoder_out, batch_size, encoder_dim, num_pixels = \
             self._encoder_info(encoder_out)
@@ -88,8 +89,7 @@ class Decoder(torch.nn.Module):
             encoder_out, batch_size, num_pixels, decode_lengths
         )
 
-        bert_emb = self.bert(captions_ids, decode_lengths, self.vocab,
-                             device=device)
+        bert_emb = self.bert(captions_ids, decode_lengths, self.vocab)
 
         predictions, alphas = self._loop_for_attention_word_generation(
             encoder_out, bert_emb, decode_lengths, hidden, cell,

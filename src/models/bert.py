@@ -58,7 +58,7 @@ class Bert(torch.nn.Module):
             param.requires_grad = False
 
         self.device = bert.weight.device
-        print(self.device)
+        print('device=', self.device,'!')
 
     def forward(self, captions_ids, decode_lengths, vocab, pad_id=0):
         """ Predict a BERT embedding for each caption in captions_ids.

@@ -78,6 +78,7 @@ class Bert(torch.nn.Module):
         Default values (BERT parameters)
         - bert_emb_dim = 768
         """
+        return None
         embeddings = []
         max_dec_len = max(decode_lengths)
 

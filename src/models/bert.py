@@ -47,12 +47,12 @@ class Bert(torch.nn.Module):
     Notice that BERT is also an attention model, meaning that both images
     and captions embeddings are formed by attention mechanisms.
     """
-    def __init__(self, device=DEFAULT_DEVICE):
+    def __init__(self, dev_id=DEFAULT_DEVICE):
         """The constructor initializes the Bert layer, its tokenizer and
         freeze its parameters to avoid train it.
         """
         super(Bert, self).__init__()
-        self.device = device
+        self.dev_id = dev_id
 
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.bert = BertModel.from_pretrained('bert-base-uncased')
@@ -113,7 +113,7 @@ class Bert(torch.nn.Module):
 
     def _predict(self, tokens_id):
         bert_embedding, _ = \
-            self.bert(torch.tensor([tokens_id]).to(self.device))
+            self.bert(torch.tensor([tokens_id]).to(self.dev_id))
         return bert_embedding.squeeze(0)
 
     def _pred2tokens_embeddings(self, caption, tokenized, predicted):

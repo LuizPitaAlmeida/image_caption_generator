@@ -44,14 +44,15 @@ class Decoder(torch.nn.Module):
                  bert_emb_dim=BERT_EMBEDDING_DIM,
                  attention_dim=ATTENTION_EMBEDDING_DIM,
                  decoder_dim=DECODER_EMBEDDING_DIM, dropout=DROPOUT_VALUE,
-                 device=DEFAULT_DEVICE):
+                 dev_id=DEFAULT_DEVICE):
         super(Decoder, self).__init__()
         self.vocab = vocab
         self.vocab_size = len(vocab)
         self.dropout = dropout
 
         # BERT INIT
-        self.bert = Bert(device=device)
+        print(dev_id)
+        self.bert = Bert(dev_id=dev_id)
 
         # ATTENTION INIT
         self.attention = SoftAttention(encoder_dim, decoder_dim, attention_dim)

@@ -51,14 +51,14 @@ class Bert(torch.nn.Module):
         freeze its parameters to avoid train it.
         """
         super(Bert, self).__init__()
-        self.dev_id = dev_id
 
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.bert = BertModel.from_pretrained('bert-base-uncased')
         for param in self.bert.parameters():
             param.requires_grad = False
 
-        self.bert_tokens_id = torch.Tensor()
+        self.device = bert.weight.device
+        print(self.device)
 
     def forward(self, captions_ids, decode_lengths, vocab, pad_id=0):
         """ Predict a BERT embedding for each caption in captions_ids.
@@ -113,8 +113,9 @@ class Bert(torch.nn.Module):
         return caption, tokenized_cap, indexed_tokens
 
     def _predict(self, tokens_id):
-        self.bert_tokens_id = torch.tensor([tokens_id])
-        bert_embedding, _ = self.bert(self.bert_tokens_id)
+        bert_embedding, _ = self.bert(
+            torch.tensor([tokens_id]).to(self.device)
+        )
         return bert_embedding.squeeze(0)
 
     def _pred2tokens_embeddings(self, caption, tokenized, predicted):

@@ -33,7 +33,7 @@ BERT_EMBEDDING_DIM = 768
 ATTENTION_EMBEDDING_DIM = 512
 DECODER_EMBEDDING_DIM = 512
 DROPOUT_VALUE = 0.5
-DEFAULT_DEVICE = "cuda:0"
+DEFAULT_DEVICE = torch.device("cuda:0")
 
 
 class Decoder(torch.nn.Module):
@@ -44,7 +44,7 @@ class Decoder(torch.nn.Module):
                  bert_emb_dim=BERT_EMBEDDING_DIM,
                  attention_dim=ATTENTION_EMBEDDING_DIM,
                  decoder_dim=DECODER_EMBEDDING_DIM, dropout=DROPOUT_VALUE,
-                 device=torch.device(DEFAULT_DEVICE)):
+                 device=DEFAULT_DEVICE):
         super(Decoder, self).__init__()
         self.vocab = vocab
         self.vocab_size = len(vocab)

@@ -110,12 +110,10 @@ class Bert(torch.nn.Module):
         caption = CLS_TOKEN + caption
         tokenized_cap = self.tokenizer.tokenize(caption)
         indexed_tokens = self.tokenizer.convert_tokens_to_ids(tokenized_cap)
-        return caption, tokenized_cap, indexed_tokens
+        return caption, tokenized_cap.to(self.device), indexed_tokens.to(self.device)
 
     def _predict(self, tokens_id):
-        bert_embedding, _ = self.bert(
-            torch.tensor([tokens_id]).to(self.device)
-        )
+        bert_embedding, _ = self.bert(torch.tensor([tokens_id]))
         return bert_embedding.squeeze(0)
 
     def _pred2tokens_embeddings(self, caption, tokenized, predicted):

@@ -51,7 +51,6 @@ class Decoder(torch.nn.Module):
         self.vocab = vocab
         self.vocab_size = len(vocab)
         self.dropout = dropout
-        print(device)
 
         # BERT INIT
         self.bert = Bert(device)

@@ -2,7 +2,6 @@ import torchvision
 from torchvision import datasets, models, transforms
 from matplotlib import pyplot as plt
 import random
-plt.style.use('ggplot')
 
 
 def simple_dataset(images_path, annotation_json):
@@ -10,16 +9,17 @@ def simple_dataset(images_path, annotation_json):
         root=images_path,
         annFile=annotation_json,
         transform=transforms.ToTensor())
-    print('Number of samples: ', len(dataset))
+    print('\nNumber of samples: ', len(dataset))
     return dataset
 
 
 def show_sample(dataset, sample_idx):
     img, target = dataset[sample_idx]
-    print("References:")
+    print("\nReferences:")
     for label in target:
         print(label)
     plt.imshow(img.permute(1, 2, 0))
+    plt.axis('off')
     plt.show()
 
 

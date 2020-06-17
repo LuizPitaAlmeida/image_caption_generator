@@ -38,6 +38,9 @@ def build_vocab(json, threshold):
     """Build a simple vocabulary wrapper."""
     coco = COCO(json)
     counter = Counter()
+
+    nltk.download('punkt')
+
     ids = coco.anns.keys()
     for i, id in enumerate(ids):
         caption = str(coco.anns[id]['caption'])

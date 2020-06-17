@@ -12,3 +12,4 @@ def transform_function():
         transforms.ToTensor(),
         transforms.Normalize(IMG_MEAN_VALUES,
                              IMG_STD_VALUES)])
+    return transform

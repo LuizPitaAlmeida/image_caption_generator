@@ -20,6 +20,7 @@ def show_sample(dataset, sample_idx):
     for label in target:
         print(label)
     plt.imshow(img.permute(1, 2, 0))
+    plt.show()
 
 
 def dataset_sample_example(images_path, annotation_json, seed=0):

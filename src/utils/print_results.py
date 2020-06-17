@@ -29,6 +29,7 @@ def print_sample(vocab, hypotheses, references, images, sample_id, alphas,
     plt.figure()
     plt.imshow(image)
     plt.axis('off')
+    plt.show()
 
     if show_att:
         plt.figure(figsize=(15, 15))
@@ -50,3 +51,4 @@ def print_sample(vocab, hypotheses, references, images, sample_id, alphas,
             else:
                 plt.imshow(alpha, alpha=0.7, cmap='gray')
             plt.axis('off')
+        plt.show()

@@ -1,0 +1,2 @@
+http://images.cocodataset.org/annotations/image_info_test2014.zip
+http://images.cocodataset.org/zips/test2014.zip

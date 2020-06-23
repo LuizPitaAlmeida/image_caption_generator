@@ -7,6 +7,7 @@ IMG_STD_VALUES = (0.229, 0.224, 0.225)
 
 def transform_function():
     transform = transforms.Compose([
+        transforms.Resize((IMG_SIZE, IMG_SIZE)),
         #transforms.RandomCrop(IMG_SIZE),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),

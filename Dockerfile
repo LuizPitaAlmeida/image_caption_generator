@@ -1,19 +1,16 @@
 # Base stage
-FROM ubuntu:18.04
+FROM pytorch/pytorch:1.5.1-cuda10.1-cudnn7-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install --yes \
-    jupyter \
-    python3-pip &&\
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install torch==1.5.0+cpu \
-    torchvision==0.6.0+cpu \
-    -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install nltk==3.5 \
+    pytorch-lightning==0.8.3 \
+    transformers==3.0.0
+RUN conda install -c conda-forge pycocotools
 
+COPY src /src
+RUN python /src/utils/setup.py install
+RUN python /src/data_process/setup.py install
+RUN python /src/models/setup.py install
 
 EXPOSE 8888
-ENTRYPOINT ["jupyter", "notebook", "--ip=0.0.0.0", \
-            "--no-browser", "--allow-root", \
-            "--notebook-dir=/executable_papers"]

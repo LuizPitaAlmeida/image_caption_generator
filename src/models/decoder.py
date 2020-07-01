@@ -24,8 +24,8 @@ Thanks Abdulrahman Jamjoom, Yunjey Choi, and Sagar Vinodababu
 """
 
 import torch
-from imgcap_models.bert import Bert
-from imgcap_models.softattention import SoftAttention
+from .bert import Bert
+from .softattention import SoftAttention
 
 # Defines
 ENCODER_EMBEDDING_DIM = 2048

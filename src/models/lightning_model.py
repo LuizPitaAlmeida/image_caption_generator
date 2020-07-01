@@ -14,14 +14,14 @@ It was designed to run in a GPU.
 
 import numpy as np
 
-from nltk.translate.bleu_score import corpus_bleu
 import torch
 from torch.nn.utils.rnn import pack_padded_sequence
 import pytorch_lightning as pl
+from nltk.translate.bleu_score import corpus_bleu
 
 from utils.hardware_stats import HardwareStats
-from decoder import Decoder
-from encoder import Encoder
+from .decoder import Decoder
+from .encoder import Encoder
 
 
 class ImageCaptioning(pl.LightningModule):

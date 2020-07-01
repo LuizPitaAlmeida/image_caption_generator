@@ -15,10 +15,10 @@ from pytorch_lightning.callbacks import ModelCheckpoint, Callback
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning import Trainer
 
-from models.lightining_model import ImageCaptioning
-from data_process.build_vocab import build_vocab
-from data_process.image_tranform import transform_function
-from data_process.data_loader import get_loader
+from lightining_model import ImageCaptioning
+from build_vocab import build_vocab
+from image_tranform import transform_function
+from data_loader import get_loader
 
 EARLY_STOP = False
 BATCH_SIZE = 64

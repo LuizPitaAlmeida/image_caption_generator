@@ -5,8 +5,8 @@ Compute metrics to valid dataset
 import torch
 from pytorch_lightning import Trainer
 
-from models.lightining_model import ImageCaptioning
-from data_process.build_vocab import build_vocab
+from lightining_model import ImageCaptioning
+from build_vocab import build_vocab
 
 
 class TestPrediction():

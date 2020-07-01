@@ -5,7 +5,7 @@ Compute metrics to valid dataset
 import torch
 from pytorch_lightning import Trainer
 
-from lightining_model import ImageCaptioning
+from lightning_model import ImageCaptioning
 from build_vocab import build_vocab
 
 

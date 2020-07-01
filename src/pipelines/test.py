@@ -22,10 +22,11 @@ class TestPrediction():
                           gpus=1)
         trainer.test(self.model)
 
-    def predict_in_single_batch(self):
+    def predict_in_single_batch(self, single_batch=None):
         checkpoint = torch.load(self.ckpt_path)
         self.model.load_state_dict(checkpoint['state_dict'])
-        single_batch = next(iter(self.test_data))
+        if single_batch is None:
+            single_batch = next(iter(self.test_data))
         imgs, captions, lengths = single_batch
         out = self.model((imgs.cuda(), captions.cuda(), lengths))
         return out

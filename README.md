@@ -9,6 +9,9 @@ More info about algorithm refer to [Image_Captioning.pdf](./Image_Captioning.pdf
 For a reproducible paper of our results refer to
 [Colab Notebook](<https://colab.research.google.com/drive/1oHJTiFP97rvTqZ6ye5kPHSRS7AmBd4mW?usp=sharing>)
 
+Now, the reproduction only by Colab with GPU.
+The Docker feature described here are under construction.
+
 ## Repository structure
 
 **Folders**

@@ -10,12 +10,13 @@ from build_vocab import build_vocab
 
 
 class TestPrediction():
-    def __init__(self, dataloader, vocab, ckpt_path):
+    def __init__(self, train_dataloader, test_dataloader, vocab, ckpt_path):
         super().__init__()
 
-        self.model = ImageCaptioning(dataloader, dataloader, vocab).cuda()
+        self.model = ImageCaptioning(
+            train_dataloader, test_dataloader, vocab).cuda()
         self.ckpt_path = ckpt_path
-        self.test_data = dataloader
+        self.test_data = test_dataloader
 
     def notebook_test(self):
         trainer = Trainer(resume_from_checkpoint=self.ckpt_path,

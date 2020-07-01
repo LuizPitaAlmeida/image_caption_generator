@@ -19,7 +19,7 @@ from torch.nn.utils.rnn import pack_padded_sequence
 import pytorch_lightning as pl
 from nltk.translate.bleu_score import corpus_bleu
 
-from utils.hardware_stats import HardwareStats
+from hardware_stats import HardwareStats
 from decoder import Decoder
 from encoder import Encoder
 

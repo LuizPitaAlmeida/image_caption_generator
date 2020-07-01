@@ -15,7 +15,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint, Callback
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning import Trainer
 
-from lightining_model import ImageCaptioning
+from lightning_model import ImageCaptioning
 from build_vocab import build_vocab
 from image_tranform import transform_function
 from data_loader import get_loader
